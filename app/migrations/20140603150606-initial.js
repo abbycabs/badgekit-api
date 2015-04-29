@@ -113,8 +113,7 @@ exports.up = function (db, callback) {
                 + "`issuedOn`     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, "
                 + "`expires`      TIMESTAMP NULL, "
                 + "`claimCode`    VARCHAR(255) NULL, "
-                + "`badgeId`     INT NOT NULL REFERENCES `badges`(`id`), "
-                + "UNIQUE KEY     `email_and_badge` (`email`, `badgeId`) "
+                + "`badgeId`     INT NOT NULL REFERENCES `badges`(`id`) "
                 + ") CHARACTER SET utf8 "
                 + "ENGINE=InnoDB "
             ) ,
