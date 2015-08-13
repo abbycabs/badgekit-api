@@ -262,14 +262,22 @@ exports = module.exports = function applyBadgeRoutes (server) {
              findProgramBadge, getBadgeInstances)
   function getBadgeInstances(req, res, next) {
     var options = {relationships: true, relationshipsDepth: 2};
-
     if (req.pageData) {
       options.limit = req.pageData.count;
       options.page = req.pageData.page;
       options.includeTotal = true;
     }
 
-    BadgeInstances.get({ badgeId: req.badge.id}, options).then(function (result) {
+    var context = { };
+
+    if(req.badge) {
+      context.badgeId = req.badge.id;
+    }
+    if(req.query.evidenceUrl) {
+      context.evidenceUrl = req.query.evidenceUrl;
+    }
+
+    BadgeInstances.get(context, options).then(function (result) {
       var total = 0;
       var rows = result;
       if (req.pageData) {
@@ -449,7 +457,7 @@ exports = module.exports = function applyBadgeRoutes (server) {
         type: 'hosted',
       },
       issuedOn: unixtimeFromDate(instance.issuedOn),
-      evidence: instance.evidenceUrl, 
+      evidence: instance.evidenceUrl,
       expires: unixtimeFromDate(instance.expires),
     }
   }

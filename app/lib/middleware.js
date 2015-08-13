@@ -59,6 +59,9 @@ function createFinder(modelName, gOpts) {
       const value = req.params[param]
 
       baseQuery[field] = value
+      if(value == '*'){
+        return next();
+      }
 
       const query = makeQuery(req, where, baseQuery)
       const opts = {relationships: relationships}
