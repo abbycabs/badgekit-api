@@ -383,6 +383,11 @@ exports = module.exports = function applyBadgeRoutes (server) {
       queryParams.push(programId);
     }
 
+    if(req.query.evidenceUrl) {
+      query += ' AND i.`evidenceUrl` = ?';
+      queryParams.push(req.query.evidenceUrl);
+    }
+
     BadgeInstances.get([query, queryParams]).then(function (rows) {
       var instanceIds = rows.map(function(row) { return row.id; });
       if (instanceIds.length) {
