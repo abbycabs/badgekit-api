@@ -3,12 +3,12 @@ var type = dbm.dataType;
 
 exports.up = function(db, callback) {
   db.runSql("ALTER TABLE `badgeInstances` "
-          + "  ADD `name` VARCHAR(255) "
+          + "  ADD `authorName` VARCHAR(255) "
           , callback);
 };
 
 exports.down = function(db, callback) {
   db.runSql("ALTER TABLE `badgeInstances` "
-          + "  DROP COLUMN `name` "
+          + "  DROP COLUMN `authorName` "
           , callback);
 };
